@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
 
 namespace WPCracker
 {
@@ -20,16 +20,20 @@ namespace WPCracker
 
             var (top, left) = (Console.CursorTop, Console.CursorLeft);
 
+            var found = false;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             void Update(decimal percentage, long seconds)
             {
                 var remaining = TimeSpan.FromSeconds(seconds);
                 Console.SetCursorPosition(left, top);
-                Console.WriteLine($"{percentage * 100} % ready");
+                Console.WriteLine($"{percentage * 100:0.0000} % ready");
                 Console.SetCursorPosition(left, top + 1);
-                Console.WriteLine($"{remaining.TotalMinutes} minutes remaining");
+                Console.WriteLine($"{remaining.TotalMinutes:0.0} minutes remaining");
+                Console.SetCursorPosition(left, top + 2);
+                Console.WriteLine($"{watch.Elapsed.TotalMinutes:0.0} minutes elapsed");
             }
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
             while (!sr.EndOfStream)
             {
                 var buffer = new List<string>();
@@ -49,10 +53,10 @@ namespace WPCracker
                     {
                         if (!login.LogInAttemptAsync(username, password).GetAwaiter().GetResult()) return;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Password found!");
+                        Console.WriteLine("\nPassword found!");
                         Console.WriteLine($"Username: {username}\nPassword: {password}");
                         Console.ResetColor();
-                        Environment.Exit(0);
+                        found = true;
                     }
                     catch (Exception ex)
                     {
@@ -61,6 +65,9 @@ namespace WPCracker
                         Console.ResetColor();
                     }
                 });
+                
+                if (found)
+                    return;
             }
         }
     }

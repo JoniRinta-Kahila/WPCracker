@@ -1,4 +1,5 @@
-﻿using PowerArgs;
+﻿using System;
+using PowerArgs;
 
 namespace WPCracker
 {
@@ -27,6 +28,7 @@ namespace WPCracker
             public void Main()
             {
                 Attacks.BruteForceAttack(TargetUri, Username, WordlistPath, MaxThreads, BatchCount);
+                Console.ReadLine();
             }
         }
     }
