@@ -1,8 +1,6 @@
 # WPCracker
 
-WordPress login Brute Force tool
-
-When you test with this tool, you need to know The username. So far, username enumeration is not possible with this tool.
+WordPress user enumeration and login Brute Force tool
 
 The tool makes it possible to adjust the number of threads as well as how large password batches each thread is tested at a time.
 
