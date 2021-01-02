@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using PowerArgs;
 
 namespace WPCracker
@@ -8,14 +9,42 @@ namespace WPCracker
         static void Main(string[] args)
         {
             PrintBanner();
+
+            //Brute Force args
             Console.WriteLine("Get help:    > WPCracker.exe -? <\n");
             try
             {
-                Args.InvokeMain<MyArgs.BruteForce>(args);
+                switch (args[0])
+                {
+                    case "--brute":
+                        if (args.Length > 1 && args[1] == "-?")
+                            Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs.BruteForce>());
+                        else
+                        {
+                            args = args.Skip(1).ToArray();
+                            Args.InvokeMain<MyArgs.BruteForce>(args);
+                        }
+                        break;
+                    case "--enum":
+                        if (args.Length > 1 && args[1] == "-?")
+                            Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs.UserEnumeration>());
+                        else
+                        {
+                            args = args.Skip(1).ToArray();
+                            Args.InvokeMain<MyArgs.UserEnumeration>(args);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs.AttackArgs>());
+                        Console.ReadLine();
+                        break;
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs>());
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs.AttackArgs>());
+                Console.ReadLine();
             }
         }
 

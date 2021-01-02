@@ -3,12 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Rintsi</Authors>
     <Description>WordPress login Brute Force tool</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PowerArgs" Version="3.6.0" />
   </ItemGroup>
 
