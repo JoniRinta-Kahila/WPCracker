@@ -62,7 +62,7 @@ namespace WPCracker
             Console.WriteLine(@"| $$$/ \  $$$| $$      | $$    $$| $$      /$$__  $$| $$      | $$_  $$ | $$_____/| $$      ");
             Console.WriteLine(@"| $$/   \  $$| $$      |  $$$$$$/| $$     |  $$$$$$$|  $$$$$$$| $$ \  $$|  $$$$$$$| $$      ");
             Console.WriteLine(@"|__/     \__/|__/       \______/ |__/      \_______/ \_______/|__/  \__/ \_______/|__/      ");
-            Console.WriteLine("                                Not for malicious use                      By Rintsi    v1.0 ");
+            Console.WriteLine("                                Not for malicious use                      By Rintsi    v1.2 ");
             Console.WriteLine();
             Console.ResetColor();
         }
