@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using PowerArgs;
 
 namespace WPCracker
@@ -8,10 +9,11 @@ namespace WPCracker
     {
         static void Main(string[] args)
         {
-            PrintBanner();
+            var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            var exe = isWindows ? "WPCracker.exe" : "WPCracker";
+            PrintBanner(); 
+            Console.WriteLine($"Get help:    > {exe} -? <\n");
 
-            //Brute Force args
-            Console.WriteLine("Get help:    > WPCracker.exe -? <\n");
             try
             {
                 switch (args[0])
@@ -40,9 +42,8 @@ namespace WPCracker
                         break;
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
                 Console.WriteLine(ArgUsage.GenerateUsageFromTemplate<MyArgs.AttackArgs>());
                 Console.ReadLine();
             }
@@ -62,7 +63,7 @@ namespace WPCracker
             Console.WriteLine(@"| $$$/ \  $$$| $$      | $$    $$| $$      /$$__  $$| $$      | $$_  $$ | $$_____/| $$      ");
             Console.WriteLine(@"| $$/   \  $$| $$      |  $$$$$$/| $$     |  $$$$$$$|  $$$$$$$| $$ \  $$|  $$$$$$$| $$      ");
             Console.WriteLine(@"|__/     \__/|__/       \______/ |__/      \_______/ \_______/|__/  \__/ \_______/|__/      ");
-            Console.WriteLine("                                Not for malicious use                      By Rintsi    v1.2 ");
+            Console.WriteLine($"                                Not for malicious use                 By Rintsi    v{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}");
             Console.WriteLine();
             Console.ResetColor();
         }

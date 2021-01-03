@@ -1,5 +1,7 @@
 ﻿using System;
 using PowerArgs;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace WPCracker
 {
