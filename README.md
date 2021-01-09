@@ -1,10 +1,15 @@
 # WPCracker
 
-WordPress user enumeration and login Brute Force tool
+WordPress user enumeration and login Brute Force tool for Windows and Linux
 
+With the Brute Force tool, you can control how aggressive an attack you want to perform, and this affects the attack time required.
 The tool makes it possible to adjust the number of threads as well as how large password batches each thread is tested at a time.
+However, too much attack power can cause the victim's server to slow down.
 
-It takes about two days to go through the rockyou.txt (14,341,564 unique passwords) dictionary on my hardware when using the program's presets for the number of threads (12) and the size of the batches (1000).
+For example, When I attacked to my local server, it takes about two days to go through the rockyou.txt (14,341,564 unique passwords) when I used the program's presets for the number of threads (12) and the size of the batches (1000).
+
+In this article, "victim" refers to the attacked WordPress site in pentest lab.
+Attacking a WordPress site for which you do not have permission may be illegal.
 
 # Using:
 
